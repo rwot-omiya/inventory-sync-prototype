@@ -1,7 +1,7 @@
 # Learning & Blocker Journal
 
 **Project:** Maama Junior School inventory synchronization  
-**Author:** SARAH RWOT-OMIYA
+**Author:** Sarah Rwot-omiya
 **Date:** 21 August 2026
 
 ## Context

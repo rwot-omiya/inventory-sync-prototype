@@ -1,5 +1,7 @@
 # Maama Junior School Inventory Synchronization
 
+**Prepared by:** Sarah Rwot-omiya  
+
 This repository contains a webhook-driven synchronization service for keeping the support tool's **“Is the balance cleared?”** response current after a warehouse or payment-ledger update. The service is deliberately **webhook-first**: the originally proposed five-minute warehouse polling loop is deprecated and must not be used in production. See the [Day 4 polling deprecation notice](docs/polling-deprecation-notice.md).
 
 ## Why the design changed
