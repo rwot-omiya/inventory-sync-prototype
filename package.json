@@ -1,0 +1,14 @@
+{
+  "name": "maama-junior-inventory-sync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Webhook-driven inventory and balance-status synchronization service for Maama Junior School.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
