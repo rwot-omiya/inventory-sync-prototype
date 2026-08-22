@@ -2,7 +2,7 @@
 
 **Handling:** Internal delivery record. Do not publish outside the project team.  
 **Project:** Maama Junior School inventory synchronization  
-**Prepared by:** SARAH RWOT-OMIYA  
+**Prepared by:** Sarah Rwot-omiya  
 **Date:** 2026-08-21
 
 ## Purpose

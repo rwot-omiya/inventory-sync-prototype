@@ -23,7 +23,7 @@ r.bold = True
 r.font.size = Pt(20)
 p = doc.add_paragraph()
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run('Maama Junior School inventory synchronization\nAuthor: Manus AI | 22 August 2026').italic = True
+p.add_run('Maama Junior School inventory synchronization\nAuthor: Sarah Rwot-omiya | 22 August 2026').italic = True
 
 def heading(text, level=1):
     doc.add_heading(text, level=level)

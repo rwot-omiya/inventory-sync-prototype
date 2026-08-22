@@ -2,7 +2,7 @@
 
 **Project:** Maama Junior School inventory and balance-status synchronization  
 **Decision:** Replace five-minute polling with verified webhooks  
-**Prepared by:** SARAH RWOT-OMIYA 
+**Prepared by:** Sarah Rwot-omiya
 **Date:** 2026-08-21
 
 ## Executive summary
