@@ -1,7 +1,7 @@
 # Learning & Blocker Journal
 
 **Project:** Maama Junior School inventory synchronization  
-**Author:** Manus AI  
+**Author:** SARAH RWOT-OMIYA
 **Date:** 22 August 2026
 
 ## Context
