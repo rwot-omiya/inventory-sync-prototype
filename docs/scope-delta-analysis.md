@@ -1,36 +1,35 @@
-# Scope Delta Analysis
+# Scope Delta Analysis — Day 4 Pivot
 
-**Project:** Maama Junior School inventory and balance-status synchronization  
-**Decision:** Replace five-minute polling with verified webhooks  
-**Prepared by:** Sarah Rwot-omiya
-**Date:** 2026-08-21
+**Project:** Maama Junior School balance-status synchronization  
+**Prepared by:** Sarah Rwot-omiya  
+**Decision:** Deprecate polling and adopt verified event delivery  
+**Deadline:** Polling terminated within 48 hours; no extension or negotiation
 
 ## Executive summary
 
-The original specification asked for a warehouse API poll every five minutes, message caching, and a query endpoint. The client later imposed a non-negotiable requirement that polling be terminated within 48 hours with no extension or negotiation. The delivered scope therefore preserves the cache and query outcomes while replacing the transport and trigger mechanism with an authenticated event handler.
+The original specification required polling a warehouse API every five minutes, caching messages, and exposing a query endpoint. The instructor’s Day 4 pivot made that polling method obsolete and required the system to move to event-driven delivery. The cache and query outcomes remain valuable, but polling is no longer an approved production mechanism.
 
-| Dimension | Original specification | Final specification | Delta |
+| Area | Before pivot | After pivot | Scope delta |
 | --- | --- | --- | --- |
-| Trigger | Warehouse API request every five minutes | Upstream warehouse event delivered to webhook | Polling removed; push delivery added |
-| Freshness | At most five minutes, subject to poll success | Provider delivery latency plus retry behavior | Potentially lower latency; provider delivery is now a dependency |
-| Security | API credentials and outbound request controls implied | HMAC signature, timestamp window, constant-time comparison | Security controls made explicit |
-| State | Cache messages | Cache latest normalized state and event identity | Cache retained; idempotency added |
-| Query | Expose a query endpoint | `GET /v1/balance-status/:itemId` | Contract made explicit |
-| Failure handling | Poll retry/backoff to be designed | Webhook retry, deduplication, dead-letter path required | Responsibility shifts to sender/receiver contract |
-| Deadline | No fixed termination deadline | Polling terminated within 48 hours | Hard constraint governs delivery |
+| Trigger | Outbound warehouse API request every five minutes | Inbound verified webhook/event | Polling trigger removed from the approved path |
+| User-visible state | State refreshed after the next poll | State updated after a valid upstream event | Push delivery replaces scheduled refresh |
+| Duplicate handling | Poll cycles could repeatedly observe the same message | Event identity and idempotency are required | Explicit replay protection added |
+| Security | Outbound API access was implied | HMAC signature, timestamp window, and constant-time comparison | Webhook security made explicit |
+| Query | Cached state exposed to the support tool | Same query contract retained | Business outcome preserved |
+| Day 3 artifact | Five-minute poller exists as a learning prototype | Poller is marked legacy and must not run in production | Historical artifact retained only for traceability |
 
-## What was removed
+## Removed or deprecated
 
-The final code contains no warehouse API client, five-minute interval, scheduler, polling loop, or outbound inventory request. This is intentional. Retaining dormant polling code would create an operational ambiguity and could violate the deadline by allowing the obsolete mechanism to be reactivated accidentally.
+The Day 3 files `src/polling-service.js` and `src/polling-server.js` remain in the repository only as historical coursework evidence. The command is renamed to `npm run start:polling:legacy`, and the documentation labels it as deprecated. No production deployment, runbook, or default start command should invoke it.
 
-## What was added
+## New work caused by the pivot
 
-The service now verifies `X-Warehouse-Timestamp` and `X-Warehouse-Signature`, rejects stale or invalid messages, deduplicates by `eventId`, derives the cleared state, updates the cache, and exposes a query endpoint. The specification also identifies production hardening work: durable state, observability, secret rotation, HTTPS, and dead-letter handling.
+The pivot required an event contract, webhook verification, replay-window enforcement, idempotent processing, provider retry expectations, durable-state requirements, and a migration/rollout decision. The implementation also needed to distinguish an unknown record from a known record whose balance is not cleared.
 
-## Risks and mitigations
+## What remains unchanged
 
-Webhook delivery depends on the upstream system supporting callbacks and correctly retrying failed deliveries. The integration owner must validate that capability before production rollout. The receiver's replay window and idempotency controls limit duplicate and delayed-message effects. A durable event log and alerting should be added before the service becomes the system of record.
+The service still maintains a current-state cache and exposes a query endpoint that answers whether the available amount meets the required amount. Tests for cache updates and query responses remain part of the regression suite. The pivot changes how state arrives; it does not change the support question the system answers.
 
 ## Acceptance decision
 
-The pivot is accepted because the business outcome—accurate support responses after a state change—is preserved, while the prohibited mechanism is removed. The 48-hour termination requirement is treated as a release gate, not as a future enhancement.
+The new specification is accepted when the provider can deliver signed events, valid events update the current state, duplicate or stale events are harmless, and the support query reflects the update without any scheduled warehouse request. The 48-hour polling termination is a release gate.

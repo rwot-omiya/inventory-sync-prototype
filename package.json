@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "start:polling": "node src/polling-server.js",
+    "start:polling:legacy": "node src/polling-server.js",
     "start:checkin": "node src/checkin-server.js",
     "test": "node --test"
   },

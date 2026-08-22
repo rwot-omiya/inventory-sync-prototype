@@ -1,6 +1,6 @@
 # Maama Junior School Inventory Synchronization
 
-This repository contains a webhook-driven synchronization service for keeping the support tool's **“Is the balance cleared?”** response current after a warehouse or payment-ledger update. The service is deliberately **webhook-only**: the originally proposed five-minute warehouse polling loop is removed and must not be reintroduced.
+This repository contains a webhook-driven synchronization service for keeping the support tool's **“Is the balance cleared?”** response current after a warehouse or payment-ledger update. The service is deliberately **webhook-first**: the originally proposed five-minute warehouse polling loop is deprecated and must not be used in production. See the [Day 4 polling deprecation notice](docs/polling-deprecation-notice.md).
 
 ## Why the design changed
 
@@ -39,4 +39,4 @@ curl http://localhost:3000/v1/balance-status/account-42
 
 The handler is idempotent by `eventId`, uses constant-time signature comparison, preserves the raw body for verification, and rejects stale messages. For production, add durable event storage, structured audit logs, metrics, TLS termination, secret rotation, and a dead-letter path. No scheduler, timer, warehouse polling client, or five-minute job exists in this implementation.
 
-See the [event-driven specification](docs/event-driven-specification.md), [Scope Delta Analysis](docs/scope-delta-analysis.md), [confidential Adaptability Index](docs/adaptability-index-confidential.md), and [Learning & Blocker Journal](docs/learning-and-blocker-journal.docx).
+See the [event-driven specification](docs/event-driven-specification.md), [polling deprecation notice](docs/polling-deprecation-notice.md), [Scope Delta Analysis](docs/scope-delta-analysis.md), [confidential Adaptability Index](docs/adaptability-index-confidential.md), and [Learning & Blocker Journal](docs/learning-and-blocker-journal.docx).
