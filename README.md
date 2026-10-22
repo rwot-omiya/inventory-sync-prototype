@@ -42,3 +42,8 @@ curl http://localhost:3000/v1/balance-status/account-42
 The handler is idempotent by `eventId`, uses constant-time signature comparison, preserves the raw body for verification, and rejects stale messages. For production, add durable event storage, structured audit logs, metrics, TLS termination, secret rotation, and a dead-letter path. No scheduler, timer, warehouse polling client, or five-minute job exists in this implementation.
 
 See the [Day 3 assignment](docs/day-3-assignment.md), [event-driven specification](docs/event-driven-specification.md), [polling deprecation notice](docs/polling-deprecation-notice.md), [Scope Delta Analysis](docs/scope-delta-analysis.md), [confidential Adaptability Index](docs/adaptability-index-confidential.md), and [Learning & Blocker Journal](docs/learning-and-blocker-journal.docx).
+
+
+## AZ-900 Coach hackathon tool
+
+This repository also contains an unofficial AZ-900 learning companion in [`az900-coach/`](az900-coach/). It provides original scenario-based quiz questions, instant explanations, governance-focused revision, and reusable AI Study Buddy prompts. See the [AZ-900 Coach README](az900-coach/README.md) for setup and content safeguards.

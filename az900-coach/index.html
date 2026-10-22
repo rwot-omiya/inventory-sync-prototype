@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AZ-900 Coach — an unofficial, beginner-friendly Azure Fundamentals practice companion." />
+  <title>AZ-900 Coach · Learn by doing</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="AZ-900 Coach home">
+      <span class="brand-mark">A9</span>
+      <span><strong>AZ-900 Coach</strong><small>Learn by doing</small></span>
+    </a>
+    <nav class="topnav" aria-label="Primary navigation">
+      <button class="nav-link active" data-view="learn">Practice</button>
+      <button class="nav-link" data-view="buddy">Study Buddy</button>
+      <button class="nav-link" data-view="about">About</button>
+    </nav>
+    <div class="streak"><span class="pulse-dot"></span><span id="streakText">Ready when you are</span></div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">UNOFFICIAL AZ-900 PRACTICE LAB</p>
+        <h1>Make Azure concepts<br /><em>click.</em></h1>
+        <p class="hero-lede">Short scenarios. Clear explanations. A little more confidence every round.</p>
+        <div class="hero-actions">
+          <button class="button primary" id="startButton">Start a quick round <span>→</span></button>
+          <button class="text-button" id="goGovernance">Focus on governance</button>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Current readiness snapshot">
+        <div class="card-kicker">YOUR READINESS SNAPSHOT</div>
+        <div class="readiness-number" id="readinessNumber">0%</div>
+        <p id="readinessCopy">Answer a few questions to reveal your starting point.</p>
+        <div class="progress-track"><span id="readinessBar"></span></div>
+        <div class="hero-card-foot"><span id="answeredCount">0 answered</span><span>·</span><span>Keep going</span></div>
+      </div>
+    </section>
+
+    <section id="learnView" class="view active-view">
+      <div class="section-heading">
+        <div><p class="eyebrow">PRACTICE ROOM</p><h2>Choose your lane</h2></div>
+        <p class="section-note">Every question is original and written for learning — not copied from the real exam.</p>
+      </div>
+      <div id="topicGrid" class="topic-grid"></div>
+
+      <div class="practice-layout">
+        <section class="quiz-panel" aria-live="polite">
+          <div class="quiz-topline"><span class="question-label" id="questionLabel">Question 1 of 10</span><span class="topic-chip" id="quizTopicChip">All topics</span></div>
+          <div class="question-progress"><span id="questionProgress"></span></div>
+          <div id="questionArea">
+            <p class="question-kicker">SCENARIO CHECK</p>
+            <h2 id="questionText">Pick a topic to begin.</h2>
+            <div id="answers" class="answers"></div>
+            <div id="feedback" class="feedback hidden"></div>
+          </div>
+          <div class="quiz-controls">
+            <button class="button secondary" id="nextButton" disabled>Next question <span>→</span></button>
+            <button class="text-button" id="skipButton">Skip for now</button>
+          </div>
+        </section>
+        <aside class="side-rail">
+          <div class="rail-card governance-card">
+            <div class="rail-icon">⌁</div><p class="eyebrow">YOUR FOCUS AREA</p><h3>Governance, without the fog</h3>
+            <p>Separate the tools that govern, protect, monitor, and organize your Azure environment.</p>
+            <button class="text-button" id="compareButton">Open comparison guide <span>↗</span></button>
+          </div>
+          <div class="rail-card">
+            <div class="rail-card-head"><h3>Quick glossary</h3><span class="tiny-label">3 essentials</span></div>
+            <div class="glossary-item"><span>Policy</span><p>Enforces organizational rules.</p></div>
+            <div class="glossary-item"><span>Lock</span><p>Blocks deletion or changes.</p></div>
+            <div class="glossary-item"><span>Advisor</span><p>Suggests improvements.</p></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="buddyView" class="view hidden-view">
+      <div class="section-heading buddy-heading"><div><p class="eyebrow">AI STUDY BUDDY</p><h2>Ask for a clearer way in</h2></div><p class="section-note">Copy a prompt into your preferred AI assistant. Keep the response grounded in public skills topics.</p></div>
+      <div class="buddy-layout"><div class="buddy-intro"><div class="buddy-orbit"><span>?</span><i></i><i></i><i></i></div><h3>Good prompts make hard concepts less abstract.</h3><p>Start with a pattern, add your weak topic, then ask for a check. These prompts are designed to teach — not imitate the exam.</p><div class="guardrail"><strong>Use responsibly</strong><span>Ask for original practice content. Never request recalled exam questions or Microsoft branding.</span></div></div><div id="promptGrid" class="prompt-grid"></div></div>
+    </section>
+
+    <section id="aboutView" class="view hidden-view">
+      <div class="about-card"><p class="eyebrow">ABOUT THIS PROJECT</p><h2>Built from one learner’s sticking points.</h2><p>AZ-900 Coach is an unofficial hackathon learning tool for people who want plain-language practice with Microsoft Azure Fundamentals topics. The emphasis is on governance and management because those concepts can feel close together when you are starting out.</p><div class="about-columns"><div><span class="about-number">01</span><h3>Original by design</h3><p>Questions are written as fresh scenarios for learning and do not reproduce real exam content.</p></div><div><span class="about-number">02</span><h3>Explain the why</h3><p>Feedback names the correct service and shows why the distractors do not fit.</p></div><div><span class="about-number">03</span><h3>Unofficial, always</h3><p>This project is not affiliated with or endorsed by Microsoft.</p></div></div><a class="button secondary" href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900" target="_blank" rel="noreferrer">Open the public skills outline ↗</a></div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer class="footer"><span>AZ-900 Coach · Unofficial learning companion</span><span>Built for curious beginners</span></footer>
+  <script src="/app.js" defer></script>
+</body>
+</html>

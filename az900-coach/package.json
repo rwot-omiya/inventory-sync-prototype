@@ -1,0 +1,13 @@
+{
+  "name": "az900-coach",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unofficial AZ-900 learning companion with original scenario quizzes and AI Study Buddy prompts.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
